@@ -2,15 +2,17 @@
 import { renderListWithTemplate } from './utils.mjs';
 
 function productCardTemplate(product) {
-  return `<li class="product-card">
-    <a href="product_pages/?product=${product.id}">
-      <img src="${product.img}" alt="Image of ${product.name}">
-      <h2 class="card__brand">${product.brand}</h2>
-      <h3 class="card__name">${product.name}</h3>
-      <p class="product-card__price">$${product.price}</p>
-    </a>
-    <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
-  </li>`;
+  return `
+    <li class="product-card">
+      <a href="product_pages/?products=${product.Id}">
+        <img src="${product.Image}" alt="Image of ${product.Name}">
+        <h2 class="card__brand">${product.Brand.Name}</h2>
+        <h3 class="card__name">${product.Name}</h3>
+        <p class="product-card__price">$${product.FinalPrice}</p>
+      </a>
+      <button class="add-to-cart" data-id="${product.Id}">Add to Cart</button>
+    </li>
+  `;
 }
 
 export default class ProductList {
@@ -28,7 +30,7 @@ export default class ProductList {
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
 
-    // ① Now add the event listeners
+    // Add event listeners to the dynamically created buttons
     const buttons = this.listElement.querySelectorAll('.add-to-cart');
     buttons.forEach(button => {
       button.addEventListener('click', () => {
@@ -38,7 +40,7 @@ export default class ProductList {
   }
 
   addToCart(productId, list) {
-    const product = list.find(p => p.id === productId);
+    const product = list.find(p => p.Id === productId);
     if (!product) return;
 
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -47,6 +49,47 @@ export default class ProductList {
 
     localStorage.setItem('cart', JSON.stringify(cart));
 
-    alert(`Added ${product.name} to cart!`);
+    alert(`Added ${product.Name} to cart!`);
   }
 }
+
+
+// import { renderListWithTemplate } from "./utils.mjs";
+
+// function productCardTemplate(product) {
+//   return `
+//     <li class="product-card">
+//       <a href="product_pages/?products=${product.Id}">
+//         <img src="${product.Image}" alt="${product.Name}">
+//         <h2>${product.Brand.Name}</h2>
+//         <h3>${product.Name}</h3>
+//         <p class="product-card__price">$${product.FinalPrice}</p>
+//       </a>
+//       <button class="add-to-cart" data-product-id="${product.Id}">Add to Cart</button>
+//     </li>
+//   `;
+// }
+
+
+// export default class ProductList {
+//   constructor(category, dataSource, listElement) {
+//     this.category = category;
+//     this.dataSource = dataSource;
+//     this.listElement = listElement;
+//   }
+
+//   async init() {
+//     const list = await this.dataSource.getData();
+//     this.renderList(list);
+//   }
+
+//   renderList(list) {
+//     const htmlStrings = list.map(productCardTemplate);
+//     this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
+
+//     // apply use new utility function instead of the commented code above
+//     renderListWithTemplate(productCardTemplate, this.listElement, list);
+
+//   }
+
+// }
