@@ -243,8 +243,13 @@ button {
 
 @media screen and (min-width: 500px) {
   body {
-    max-width: 1080px;
+    max-width: 1000px;
     margin: auto;
+  }
+
+  .products h2 {         /* I added this */
+    text-align: center;
+    margin-bottom: 20px;
   }
 
   .mission {
@@ -260,4 +265,5 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+  text-align: center;
 }

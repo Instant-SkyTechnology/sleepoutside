@@ -4,13 +4,16 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
   root: "src/",
+  base: "/sleepoutside/",
   plugins: [
     viteStaticCopy({
-        targets: [
-          { src: 'public/images/tents/**/*', dest: 'images/tents' },
-          { src: 'public/json/**/*', dest: 'json' } // <-- add this
-        ]
-      })
+  targets: [
+        { src: 'public/images/tents/**/*', dest: 'images/tents' },
+        { src: 'public/images/logos/**/*', dest: 'images/logos' },
+        { src: 'public/json/**/*', dest: 'json' } // Copy JSON files to dist/json/
+      ]
+    })
+
   ],
 
   build: {

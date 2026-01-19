@@ -33,7 +33,7 @@ function renderCartContents() {
     </ul>
   `;
 
-  // optionally, show total price
+  // Total price
   const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
   container.innerHTML += `<p class="cart-total"><strong>Total: $${total.toFixed(
     2
