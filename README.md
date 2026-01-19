@@ -24,4 +24,28 @@
 _BYU-Pathway Worldwide improves lives through access to spiritually based, online affordable higher education. Its mission is to develop disciples of Jesus Christ who are leaders in their homes, the Church, and their communities._
 
 
+## Steve KALALA
+## W02 Individual Activity: Dynamic Product List
 
+## Task Completed
+
+- This project implements a dynamic product list for the Sleep Outside website.
+- Products are loaded from `src/public/json/tents.json`.
+- Product cards are generated dynamically using `ProductList.mjs`.
+- Each product has an **Add to Cart** button, which stores the product in `localStorage`.
+- The home page (src/index.html) no longer has hardcoded product cards.
+- Product images are loaded dynamically from the JSON data, including newly added images.
+- Additional styling updates were applied for large-screen views, including centered h2 headings and footer text.
+
+## Live Site
+https://instant-skytechnology.github.io/sleepoutside/
+
+
+## Project Structure
+
+- src/index.html – Home page with dynamic product rendering.
+- src/js/ProductList.mjs – Generates product cards dynamically.
+- src/js/ProductData.mjs – Handles loading product data from JSON.
+- src/public/json/tents.json – Contains product data and image paths.
+- src/public/images/ – Stores product and brand images.
+- src/css/style.css – Global styles and responsive layout updates.
