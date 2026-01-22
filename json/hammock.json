@@ -1,0 +1,25 @@
+{
+  "Result": [
+    {
+      "id": 1,
+      "name": "Portable Hammock",
+      "price": 45,
+      "image": "/images/hammock1.jpg",
+      "description": "Lightweight and easy to hang anywhere."
+    },
+    {
+      "id": 2,
+      "name": "Camping Hammock",
+      "price": 60,
+      "image": "/images/hammock2.jpg",
+      "description": "Durable hammock for two people."
+    },
+    {
+      "id": 3,
+      "name": "Luxury Hammock",
+      "price": 90,
+      "image": "/images/hammock3.jpg",
+      "description": "Extra-large, comfortable, for backyard or camping."
+    }
+  ]
+}
