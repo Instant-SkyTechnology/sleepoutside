@@ -1,20 +1,23 @@
-export default class ProductData {
-  constructor(category) {
-    this.category = category;
-    this.path = `json/${this.category}.json`;
-  }
+const baseURL = import.meta.env.VITE_SERVER_URL;
 
-  getData() {
-    return fetch(this.path)
-      .then(res => {
-        if (!res.ok) throw new Error("Bad Response");
-        return res.json();
-      });
+export default class ProductData {
+  constructor() {}
+
+  async getData(category) {
+    try {
+      const response = await fetch(`${baseURL}products/search/${category}`);
+      const data = await response.json();
+      return data.Result || [];
+    } catch (err) {
+      console.error("Error fetching products:", err);
+      return [];
+    }
   }
 
   async findProductById(id) {
-    const products = await this.getData();
-    return products.find((item) => item.Id === id);
-  }
+  const response = await fetch(`${baseURL}product/${id}`);
+  const data = await response.json();
+  return data.Result;
 }
 
+}

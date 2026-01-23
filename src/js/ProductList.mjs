@@ -1,95 +1,33 @@
-// ProductList.mjs
-import { renderListWithTemplate } from './utils.mjs';
-
-function productCardTemplate(product) {
-  return `
-    <li class="product-card">
-      <a href="product_pages/?products=${product.Id}">
-        <img src="${product.Image}" alt="Image of ${product.Name}">
-        <h2 class="card__brand">${product.Brand.Name}</h2>
-        <h3 class="card__name">${product.Name}</h3>
-        <p class="product-card__price">$${product.FinalPrice}</p>
-      </a>
-      <button class="add-to-cart" data-id="${product.Id}">Add to Cart</button>
-    </li>
-  `;
-}
-
 export default class ProductList {
-  constructor(category, dataSource, listElement) {
+  constructor(category, dataSource, parentElement) {
     this.category = category;
     this.dataSource = dataSource;
-    this.listElement = listElement;
+    this.parentElement = parentElement;
   }
 
   async init() {
-    const list = await this.dataSource.getData();
-    this.renderList(list);
-  }
+    const products = await this.dataSource.getData(this.category);
 
-  renderList(list) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list);
+    if (!products.length) {
+      this.parentElement.innerHTML = "<li>No products found.</li>";
+      return;
+    }
 
-    // Add event listeners to the dynamically created buttons
-    const buttons = this.listElement.querySelectorAll('.add-to-cart');
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        this.addToCart(button.dataset.id, list);
-      });
-    });
-  }
+    const html = products.map(p => `
+      <li class="product-card">
+        <a href="/sleepoutside/product_pages/index.html?id=${p.Id}">
+          <img src="${p.Images?.PrimaryMedium || p.Image}" alt="${p.NameWithoutBrand}">
+          <h3>${p.Name}</h3>
+          <p class="brand">${p.Brand?.Name || ""}</p>
+          <p class="price">$${p.FinalPrice.toFixed(2)}</p>
+        </a>
+      </li>
+    `).join("");
 
-  addToCart(productId, list) {
-    const product = list.find(p => p.Id === productId);
-    if (!product) return;
+    this.parentElement.innerHTML = html;
 
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    cart.push(product);
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    alert(`Added ${product.Name} to cart!`);
+    // ADD CATEGORY TO TITLE (correct selector)
+    document.querySelector(".title").textContent =
+      this.category.replace("-", " ").replace(/\b\w/g, l => l.toUpperCase());
   }
 }
-
-
-// import { renderListWithTemplate } from "./utils.mjs";
-
-// function productCardTemplate(product) {
-//   return `
-//     <li class="product-card">
-//       <a href="product_pages/?products=${product.Id}">
-//         <img src="${product.Image}" alt="${product.Name}">
-//         <h2>${product.Brand.Name}</h2>
-//         <h3>${product.Name}</h3>
-//         <p class="product-card__price">$${product.FinalPrice}</p>
-//       </a>
-//       <button class="add-to-cart" data-product-id="${product.Id}">Add to Cart</button>
-//     </li>
-//   `;
-// }
-
-
-// export default class ProductList {
-//   constructor(category, dataSource, listElement) {
-//     this.category = category;
-//     this.dataSource = dataSource;
-//     this.listElement = listElement;
-//   }
-
-//   async init() {
-//     const list = await this.dataSource.getData();
-//     this.renderList(list);
-//   }
-
-//   renderList(list) {
-//     const htmlStrings = list.map(productCardTemplate);
-//     this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
-
-//     // apply use new utility function instead of the commented code above
-//     renderListWithTemplate(productCardTemplate, this.listElement, list);
-
-//   }
-
-// }

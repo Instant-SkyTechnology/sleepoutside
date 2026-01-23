@@ -49,3 +49,59 @@ https://instant-skytechnology.github.io/sleepoutside/
 - src/public/json/tents.json – Contains product data and image paths.
 - src/public/images/ – Stores product and brand images.
 - src/css/style.css – Global styles and responsive layout updates.
+
+## Steve KALALA
+## Sleep Outside (WDD 330)
+## W03 Individual Activity: Expand Inventory
+
+This project is part of the BYUI WDD 330 course. It demonstrates
+client-side application development using Vite, modular JavaScript,
+and API-driven data.
+
+# Final Submission Checklist
+# Final Submission Checklist (WDD 330)
+# Product Listing Page
+- Product listing page exists at src/product_listing/index.html
+- Header and footer load correctly
+- Clicking Tents, Backpacks, Sleeping Bags, or Hammocks displays the correct products
+- Page title updates dynamically (example: Top Products: Tents)
+- Product images display correctly
+- Clicking a product opens the product detail page
+________________________________________
+# API & Environment Variables
+- .env file exists (renamed from .env.sample)
+- VITE_SERVER_URL is set to **https://wdd330-backend.onrender.com/**
+- Render environment variables are configured correctly
+- ProductData.mjs uses import.meta.env.VITE_SERVER_URL
+________________________________________
+# Product Detail Page
+- Product detail page loads when clicking a product
+- findProductById(id) fetches data from **${baseURL}product/${id}**
+- Product image displays using PrimaryLarge or PrimaryExtraLarge
+- Add-to-cart functionality works
+________________________________________
+# Cart Page
+- Items appear in the cart after adding products
+- Product images display correctly in the cart
+- Prices display correctly
+- Cart total displays correctly
+- No console errors on the cart page
+________________________________________
+# Vite Configuration
+- vite.config.js includes the product listing page in Rollup inputs
+- Application works locally and when deployed
+- No 404 errors on any pages
+________________________________________
+# Code Quality
+- No placeholder product data remains
+- API data is used everywhere instead of local JSON
+- Folder structure follows assignment instructions
+- No important code is commented out
+________________________________________
+# Console Cleanup
+- All console.log() debug statements removed
+- Only meaningful console.error() statements remain
+
+
+
+
