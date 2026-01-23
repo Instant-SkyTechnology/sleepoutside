@@ -1,4 +1,4 @@
-import{l as s,a as n}from"./utils-B25fRPZe.js";import{P as l}from"./ProductData-Dxvez2KG.js";class d{constructor(e,r,t){this.category=e,this.dataSource=r,this.parentElement=t}async init(){const e=await this.dataSource.getData(this.category);if(!e.length){this.parentElement.innerHTML="<li>No products found.</li>";return}const r=e.map(t=>`
+import{l as s,a as n}from"./utils-B25fRPZe.js";import{P as l}from"./ProductData-CJRSSPp0.js";class d{constructor(e,r,t){this.category=e,this.dataSource=r,this.parentElement=t}async init(){const e=await this.dataSource.getData(this.category);if(!e.length){this.parentElement.innerHTML="<li>No products found.</li>";return}const r=e.map(t=>`
       <li class="product-card">
         <a href="/sleepoutside/product_pages/index.html?id=${t.Id}">
           <img src="${t.Images?.PrimaryMedium||t.Image}" alt="${t.NameWithoutBrand}">
