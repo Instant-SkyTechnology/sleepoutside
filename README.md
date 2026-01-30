@@ -103,5 +103,102 @@ ________________________________________
 - Only meaningful console.error() statements remain
 
 
+# Sleep Outside – Checkout & Unhappy Path (WDD 330 Week 4)
+
+**Author:** Steve KALALA  
+**Course:** WDD 330 – Web Frontend Development II  
+**Institution:** Brigham Young University–Idaho  
+
+This project is part of the BYUI WDD 330 course. It demonstrates client-side checkout processing, server-side validation handling, dynamic UI feedback, and cart state management using modular JavaScript and Vite.
+
+---
+
+## Project Overview
+
+The **Sleep Outside** application allows users to browse products, add items to a cart, and complete a checkout process.  
+Week 4 focuses on implementing the **checkout flow**, handling **server-side validation errors**, and providing a smooth **user experience for failure cases (unhappy path)**.
+
+
+## Final Submission Checklist (Week 4)
+
+### Checkout Page
+- Checkout page exists at `src/checkout/index.html`
+- Header and footer load correctly
+- Cart summary displays correct item count and subtotal
+- Shipping, tax, and order total calculate correctly
+- Order totals update when ZIP code loses focus
+- Checkout button submits via JavaScript (no page reload)
+
+### Form Validation & Unhappy Path Handling
+- Checkout remains on the same page when validation fails
+- Server-side validation errors are displayed clearly
+- Error messages appear at the **top of the checkout form**
+- Errors are displayed using a custom alert (not `alert()`)
+- Multiple validation errors display correctly
+- Alert messages are dismissible using an “X”
+- Page scrolls to the top when an error occurs
+
+### Successful Checkout Flow
+- Successful checkout clears the cart (`so-cart`)
+- User is redirected to `checkout/success.html`
+- “Checkout successful!” message displays correctly
+- Success message does **not** appear when validation fails
+
+### Cart Functionality
+- Products persist in cart using `localStorage`
+- Cart page displays all added items
+- Product images display correctly
+- Prices and totals calculate correctly
+- Checkout button appears only when cart has items
+
+### Cart Icon Badge
+- Cart icon displays item count badge
+- Badge updates dynamically when items are added
+- Badge appears on:
+  - Home page
+  - Cart page
+  - Product listing pages
+- Badge hides when cart is empty
+- Badge positioning is visually aligned with cart icon
+
+### Utilities & Reusability
+- `alertMessage()` utility implemented in `utils.mjs`
+- `removeAllAlerts()` clears previous alerts before new ones display
+- Alert utility is reusable across checkout and product pages
+- Header and footer load dynamically using `loadHeaderFooter()`
+
+### Vite & Deployment
+- Application works correctly in development mode
+- Application works correctly when deployed to GitHub Pages
+- `base` path is configured correctly in `vite.config.js`
+- No broken paths or missing assets in production
+- No 404 errors on deployed pages
+
+### Code Quality
+- Modular JavaScript architecture
+- No duplicate event listeners
+- No commented-out production code
+- No hard-coded validation messages
+- Folder structure follows assignment instructions
+
+### Console Cleanup
+- All `console.log()` debug statements removed
+- Only meaningful `console.error()` statements remain
+- No console errors during normal application use
+
+## Technologies Used
+- HTML5
+- CSS3
+- JavaScript (ES Modules)
+- Vite
+- LocalStorage
+- REST API
+
+## Deployment
+The project is deployed using **GitHub Pages** with a Vite production build (`dist` folder).
+
+## 📄 License
+This project is for educational purposes as part of the BYUI WDD 330 course.
+
 
 
