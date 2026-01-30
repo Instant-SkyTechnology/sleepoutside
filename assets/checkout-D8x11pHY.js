@@ -1,0 +1,14 @@
+import{g as n,r as l,a as c,s as h,l as m}from"./utils-CQ6Hs-Dj.js";function u(r){return`<li class="cart-card divider">
+  <a href="#" class="cart-card__image">
+    <img
+      src="${r.Images.PrimaryMedium}"
+      alt="${r.Name}"
+    />
+  </a>
+  <a href="#">
+    <h2 class="card__name">${r.Name}</h2>
+  </a>
+  <p class="cart-card__color">${r.Colors[0].ColorName}</p>
+  <p class="cart-card__quantity">qty: 1</p>
+  <p class="cart-card__price">$${r.FinalPrice}</p>
+</li>`}class d{constructor(e,t){this.key=e,this.parentSelector=t,this.total=0}async init(){const e=n(this.key);this.calculateListTotal(e),this.renderCartContents(e)}calculateListTotal(e){const t=e.map(a=>a.FinalPrice);this.total=t.reduce((a,s)=>a+s)}renderCartContents(){const t=n(this.key).map(a=>u(a));document.querySelector(this.parentSelector).innerHTML=t.join(""),document.querySelector(".list-total").innerText+=` $${this.total}`}}const p=new d;function g(r){const e=new FormData(r),t={};return e.forEach(function(a,s){t[s]=a}),t}function y(r){return r.map(t=>({id:t.Id,price:t.FinalPrice,name:t.Name,quantity:1}))}class f{constructor(e,t){this.key=e,this.outputSelector=t,this.list=[],this.itemTotal=0,this.shipping=0,this.tax=0,this.orderTotal=0}init(){this.list=n(this.key),this.calculateItemSummary()}calculateItemSummary(){const e=document.querySelector(this.outputSelector+" #cartTotal"),t=document.querySelector(this.outputSelector+" #num-items");t.innerText=this.list.length;const a=this.list.map(s=>s.FinalPrice);this.itemTotal=a.reduce((s,o)=>s+o,0),e.innerText="$"+this.itemTotal}calculateOrdertotal(){this.shipping=10+(this.list.length-1)*2,this.tax=(this.itemTotal*.06).toFixed(2),this.orderTotal=(parseFloat(this.itemTotal)+parseFloat(this.shipping)+parseFloat(this.tax)).toFixed(2),this.displayOrderTotals()}displayOrderTotals(){const e=document.querySelector(this.outputSelector+" #shipping"),t=document.querySelector(this.outputSelector+" #tax"),a=document.querySelector(this.outputSelector+" #orderTotal");e.innerText="$"+this.shipping,t.innerText="$"+this.tax,a.innerText="$"+this.orderTotal}async checkout(){const e=document.forms.checkout,t=[];for(const s of e.elements)if(s.required&&!s.value.trim()){const o=s.name.replace(/([A-Z])/g," $1");t.push({message:o.charAt(0).toUpperCase()+o.slice(1)+" is required"})}if(t.length>0){l(),t.forEach(s=>c(s.message));return}const a=g(e);a.orderDate=new Date,a.orderTotal=this.orderTotal,a.tax=this.tax,a.shipping=this.shipping,a.items=y(this.list);try{const s=await p.checkout(a);console.log(s),h("so-cart",[]),location.assign("/checkout/success.html")}catch(s){l(),s.message&&Array.isArray(s.message)?s.message.forEach(o=>c(o)):c("Checkout failed. Please try again."),console.log(s)}}}m();const i=new f("so-cart",".checkout-summary");i.init();document.querySelector("#zip").addEventListener("blur",i.calculateOrdertotal.bind(i));const T=document.forms.checkout;T.addEventListener("submit",async r=>{r.preventDefault(),i.checkout()});
